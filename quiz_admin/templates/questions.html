@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Questions</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard">Quiz Creator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    Welcome, {{request.session.greeting}} </a> <a href="/logout" role="button"
+                        class="btn btn-sm btn-info ml-2 text-white">Logout</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="info ml-5 my-4">
+        <h5><span style="font-weight: bold;">Quiz Name:</span> {{quiz.name}}</h5> 
+        <h5><span style="font-weight: bold;">Client:</span> {{quiz.client}}</h5>
+        <h5><span style="font-weight: bold;">Job #:</span> {{quiz.job_number}}</h5>
+        <h5><span style="font-weight: bold;">Show Date:</span> {{quiz.show_date}}</h5>
+        <h5><span style="font-weight: bold;">Creator:</span> {{quiz.created_by}}</h5>
+    </div>
+    <form action="/dashboard/{{quiz.id}}/add" method="POST" class="form_fields mb-3 ml-5 my-4">
+        {% csrf_token %}
+        {% for i in num_questions %}
+        <div class="form-group">
+            <label for="question_text">Question #{{i}}</label>
+            <input type="textarea" name="question_text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="answer_1">A</label>
+            <input type="textarea" name="answer_{{i}}" class="form-control-md">
+        </div>
+        <div class="form-group">
+            <label for="answer_2">B</label>
+            <input type="textarea" name="answer_{{i}}" class="form-control-md">
+        </div>
+        <div class="form-group">
+            <label for="answer_3">C</label>
+            <input type="textarea" name="answer_{{i}}" class="form-control-md">
+        </div>
+        <div class="form-group">
+            <label for="answer_4">D</label>
+            <input type="textarea" name="answer_{{i}}" class="form-control-md">
+        </div>
+        {% endfor %}
+        <button class="d-grid gap-2 col-12 mx-auto btn btn-info">Submit</button>
+    </form>
+</body>

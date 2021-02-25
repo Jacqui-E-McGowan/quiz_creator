@@ -1,0 +1,58 @@
+*{
+    margin: 0px;
+}
+#container{
+    margin-right: 20px;
+}
+.login{
+    height: 150px;
+    width: 100%;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: lightgreen;
+}
+.table{
+    margin-right: 200px;
+}
+.info{
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: lightgray;
+}
+.welcome{
+    width: 95%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+.form_fields{
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: lightgray;
+}
+.buttons{
+    width: 90%;
+}
+.questions{
+    width: 95%;
+    padding: 50px 150px;
+    background-color: white;
+    border-radius: 10px;
+}
+/* .each_question{
+    margin-left: 25%;
+} */
+.question_head{
+    padding: 20px;
+    background-color: lightgray;
+    border-radius: 5px;
+}
+.answers{
+    padding: 10px;
+    background-color: rgb(245, 244, 244);
+    border-radius: 5px;
+}
+.answers:hover{
+    background-color: lightgray;
+}

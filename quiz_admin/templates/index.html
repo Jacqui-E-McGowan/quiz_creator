@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Creator Admin Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div>
+        <h1 class="text-light text-center bg-dark py-2">Quiz Creator</h1>
+    </div>
+    <div class="my-4 ml-5">
+        <h3>Admin Login</h3>
+        <form action="/login" method="POST">
+            {% csrf_token %}
+            <div class="col-md-4 form-group">
+                <label for="login_email">Email</label>
+                <input type="email" name="login_email" id="email" class="form-control">
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="login_password">Password</label>
+                <input type="password" name="login_password" id="password" class="form-control">
+            </div>
+            <button class="col-md-2 btn my-3 ml-3 btn-info">Login</button>
+        </form>
+    </div>
+</body>

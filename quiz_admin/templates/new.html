@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a new quiz!</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard">Quiz Creator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    Welcome, {{request.session.greeting}} </a> <a href="/logout" role="button"
+                        class="btn btn-sm btn-info ml-2 text-white">Logout</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <form action="/create" method="POST" enctype="multipart/form-data" class="form_fields mb-3 ml-5 my-4">
+        {% csrf_token %}
+        {% for message in messages %}
+        <p class='text-danger small'>{{message}}</p>
+        {% endfor %}
+        <div>
+            <label for="image">Upload Background Image</label>
+            <input type="file" name="image" class="my-4 ml-5">
+        </div>
+        <div class="form-group mb-3">
+            <label for="name">Quiz Name</label>
+            <input type="text" name="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="client">Client</label>
+            <input type="text" name="client" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="job_number">Job #</label>
+            <input type="text" name="job_number" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="show_date">Show Date</label>
+            <input type="date" name="show_date" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="created_by">Quiz Creator</label>
+            <input type="textarea" name="created_by" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <input type="textarea" name="message" class="form-control">
+        </div>
+        <button class="btn btn-info">Add Questions</button>
+        </form>
+    </div>
+</body>

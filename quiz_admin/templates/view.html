@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Your Quiz</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        {% if quiz.image.url != "" %}
+        body{
+            background-image: url({{quiz.image.url}});
+            background-size: cover;
+        }
+        {% endif %}
+    </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/dashboard">Quiz Creator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto"></ul>
+            <span class="navbar-text">
+                Welcome, {{request.session.greeting}} </a> <a href="/logout" role="button"
+                    class="btn btn-sm btn-info ml-2 text-white">Logout</a>
+            </span>
+        </div>
+    </div>
+</nav>
+<body>
+    <h1 class="text-center my-4">{{quiz.name}}</h1>
+    <div class="welcome text-center ml-5 my-4">
+        <h2>Welcome!</h2>
+        <h5>{{quiz.message}}</h5>
+    </div>
+    <div class="questions ml-5 my-4">
+        <div class="each_question text-center">
+        {% for question in questions %}
+        {% if question.quiz.id == quiz.id %}
+        {% if question.question_text != "" %}
+            <h4 class="question_head">{{question.question_text}}</h4>  
+            {% if question.answer_1 != "" %}
+            <p class="answers">{{question.answer_1}}</p>
+            {% endif %}
+            {% if question.answer_2 != "" %}
+            <p class="answers">{{question.answer_2}}</p>
+            {% endif %}
+            {% if question.answer_3 != "" %}
+            <p class="answers">{{question.answer_3}}</p>
+            {% endif %}
+            {% if question.answer_4 != "" %}
+            <p class="answers">{{question.answer_4}}</p>
+            {% endif %}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        <a href="/dashboard" class="d-grid gap-2 col-12 my-4 mx-auto btn btn-info">Dashboard</a>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Editor</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard">Quiz Creator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    Welcome, {{request.session.greeting}} </a> <a href="/logout" role="button"
+                        class="btn btn-sm btn-info ml-2 text-white">Logout</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <form action="/dashboard/{{quiz.id}}/update_questions" method="POST" class="form_fields mb-3 ml-5 my-4">
+            {% csrf_token %}
+            {% for message in messages %}
+            <p class='text-danger small'>{{message}}</p>
+            {% endfor %}
+            {% for question in questions %}
+            <div class="form-group">
+                <label for="question_text">Question #{{forloop.counter}}</label>
+                <input type="textarea" name="question_text_{{question.id}}" class="form-control" value="{{question.question_text}}">
+            </div>
+            <div class="form-group">
+                <label for="answer_1">A</label>
+                <input type="textarea" name="answer_{{question.id}}_1" class="form-control" value="{{question.answer_1}}">
+            </div>
+            <div class="form-group">
+                <label for="answer_2">B</label>
+                <input type="textarea" name="answer_{{question.id}}_2" class="form-control" value="{{question.answer_2}}">
+            </div>
+            <div class="form-group">
+                <label for="answer_3">C</label>
+                <input type="textarea" name="answer_{{question.id}}_3" class="form-control" value="{{question.answer_3}}">
+            </div>
+            <div class="form-group">
+                <label for="answer_4">D</label>
+                <input type="textarea" name="answer_{{question.id}}_4" class="form-control" value="{{question.answer_4}}">
+            </div>
+            {% endfor %}
+            <button class="btn btn-info">Submit</button>
+            </form>
+    </div>
+</body>
